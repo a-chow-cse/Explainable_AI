@@ -30,7 +30,7 @@ def get_args():
     parser.add_argument(
         '--image-path',
         type=str,
-        default='/home/disaster/Documents/github/CUB_200_2011/images/002.Laysan_Albatross/Laysan_Albatross_0003_1033.jpg',
+        default='../cub/val2017/1.jpg',
         help='Input image path')
     parser.add_argument('--aug_smooth', action='store_true',
                         help='Apply test time augmentation to smooth the CAM')
@@ -116,7 +116,7 @@ if __name__ == '__main__':
     
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    model.load_state_dict(torch.load('../resnet_temp.pt'),map_location=torch.device('cpu'))
+    model.load_state_dict(torch.load('../resnet_temp.pt', map_location=device))
     exit
 
     # Choose the target layer you want to compute the visualization for.
