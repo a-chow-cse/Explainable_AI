@@ -84,6 +84,7 @@ class CausalMetric():
                 print('{}: {:.3f}'.format(get_class_name(cl[0][0]), float(pr[0][0])))
                 print('{}: {:.3f}'.format(get_class_name(cl[0][1]), float(pr[0][1])))
             scores[i] = pred[0, c]
+            #print(scores)
             # Render image if verbose, if it's the last step or if save is required.
             if verbose == 2 or (verbose == 1 and i == n_steps) or save_to:
                 plt.figure(figsize=(10, 5))
@@ -100,14 +101,13 @@ class CausalMetric():
                 plt.title(title)
                 plt.xlabel(ylabel)
                 plt.ylabel(get_class_name(c))
-                if save_to:
-                    plt.savefig(save_to + '/{:03d}.png'.format(i))
-                    plt.close()
-                else:
-                    plt.show()
+
             if i < n_steps:
                 coords = salient_order[:, self.step * i:self.step * (i + 1)]
                 start.cpu().numpy().reshape(1, 3, HW)[0, :, coords] = finish.cpu().numpy().reshape(1, 3, HW)[0, :, coords]
+        if save_to:
+            plt.savefig(save_to)
+            plt.close()
         return scores
 
     def evaluate(self, img_batch, exp_batch, batch_size):
