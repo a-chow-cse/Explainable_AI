@@ -131,9 +131,11 @@ if __name__ == '__main__':
     targets = None
     out = model(input_tensor)
     _, preds = torch.max(out, dim=1)
-    print("Targets: ", preds )
-    targets=[ClassifierOutputTarget(160)]
-    #targets=[ClassifierOutputTarget(preds[0].item())]
+    print("Prediction: ", preds[0].item() )
+    print("Actual: ", 9 )
+    targets=[ClassifierOutputTarget(preds[0].item())]
+    #targets=[ClassifierOutputTarget(9)]
+    print("grad-cam target: ",targets[0])
 
     # Using the with statement ensures the context is freed, and you can
     # recreate different CAM objects in a loop.

@@ -1,2 +1,3 @@
-RISE-master/masks.npy
-RISE-master/model.py
+ProtoPNet/pretrained_models/*
+ProtoPNet/saved_models/*
+ProtoPNet/datasets/*
